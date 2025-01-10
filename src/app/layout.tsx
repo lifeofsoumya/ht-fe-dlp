@@ -11,7 +11,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="en">
       <head />
       <body>
-        <div className="container">
+        <div className="flex">
           <Sidebar />
           <main className="main-content">
             {children}

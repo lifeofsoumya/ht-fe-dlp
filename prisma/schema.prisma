@@ -58,8 +58,16 @@ model Log {
   timestamp DateTime @default(now()) // Timestamp of when the event occurred
   // userId    String      // Foreign key referencing User
   // user      User     @relation("UserLogs", fields: [userId], references: [id])
+  status    Status   @default(OPEN)
 
   @@map("logs") // Optional: maps the model to a specific table name in the database
+}
+
+enum Status {
+  CLOSED
+  OPEN
+  IN_PROGRESS
+  DO_THIS
 }
 
 model VerificationRequest {

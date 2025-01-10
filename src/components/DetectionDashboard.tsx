@@ -3,12 +3,17 @@
 import { useState } from 'react';
 import RowDetailsCard from './RowDetailsCard';
 import styles from '@/styles/detectionDashboard.module.css'; // CSS Module
+import { Button } from './ui/button';
+import changeStatus from "@/app/actions/changeStatus"
+import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 
 const DetectionDashboard = ({ logs }: { logs: any }) => {
   const [selectedRow, setSelectedRow] = useState(null);
   const [dateSortOrder, setDateSortOrder] = useState<string>('Latest'); // Date sort order state
   const [severityFilter, setSeverityFilter] = useState<string>(''); // Severity filter state
   const [searchQuery, setSearchQuery] = useState<string>(''); // Search query state
+  const router = useRouter();
 
   const handleDateSortOrderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setDateSortOrder(event.target.value);
@@ -63,6 +68,11 @@ const DetectionDashboard = ({ logs }: { logs: any }) => {
     setSelectedRow(rowData);
   };
 
+  const handleModifyStatus = async (id: any) => {
+    await changeStatus(id);
+    router.refresh();
+  }
+
   return (
     <div className={styles.mainContent}> {/* Apply styles from CSS module */}
       <div className={styles.filters}>
@@ -99,6 +109,7 @@ const DetectionDashboard = ({ logs }: { logs: any }) => {
             <th>Score</th>
             <th>Severity</th>
             <th>System ID</th>
+            <th>Status</th>
           </tr>
         </thead>
         <tbody>
@@ -108,8 +119,10 @@ const DetectionDashboard = ({ logs }: { logs: any }) => {
               <td>{new Date(row.timestamp).toLocaleString('en-In')}</td>
               <td>{row.eventType}</td>
               <td>{row.score}</td>
-              <td>{getSeverityLevel(row.score)}</td>
+              <td className={cn(row.score > 0.8 ? 'bg-red-500' : row.score > 0.5 ? 'bg-orange-500' : 'bg-green-500' )}>{getSeverityLevel(row.score)}</td>
               <td>{row.systemId}</td>
+              <td>{row.status}</td>
+              <td><Button onClick={()=> handleModifyStatus(row.id)} className='text-white bg-indigo-400 hover:bg-indigo-500'>Close</Button></td>
             </tr>
           ))}
         </tbody>
