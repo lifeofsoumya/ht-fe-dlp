@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "logs" ALTER COLUMN "score" SET DATA TYPE TEXT;

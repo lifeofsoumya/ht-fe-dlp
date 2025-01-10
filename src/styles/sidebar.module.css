@@ -1,0 +1,62 @@
+/* /src/app/styles/sidebar.module.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #2d3a3f;
+    color: #fff;
+    padding-top: 20px;
+    padding-left: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 30px;
+  }
+  
+  .navLinks {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .navLink {
+    display: block;
+    padding: 12px;
+    font-size: 18px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .navLink:hover {
+    background-color: #1e2a2d;
+  }
+  
+  .navLink:active {
+    background-color: #122124;
+  }
+  
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+      padding-top: 15px;
+    }
+  
+    .logo {
+      font-size: 20px;
+    }
+  
+    .navLink {
+      font-size: 16px;
+    }
+  }
+  
